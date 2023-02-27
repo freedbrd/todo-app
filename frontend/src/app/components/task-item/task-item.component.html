@@ -1,39 +1,31 @@
-<li class="task-item">
+<li class="task-item"
+    [class.completed]="todo?.completed"
+    [class.editing]="isEdit"
+    *ngIf="todo">
   <input type="checkbox"
+         [formControl]="checkboxControl"
          class="task-checkbox">
   <div class="task">
-    <span class="task-text">Task description</span>
+    <span *ngIf="!isEdit"
+          class="task-text">{{todo?.title}}</span>
     <input type="text"
+           [formControl]="titleControl"
+           *ngIf="isEdit"
            class="edit-input">
   </div>
   <div class="actions">
-    <button class="edit-button">Edit</button>
-    <button class="delete-button">Delete</button>
-  </div>
-</li>
-<li class="task-item completed">
-  <input type="checkbox"
-         class="task-checkbox">
-  <div class="task">
-    <span class="task-text">Task description</span>
-    <input type="text"
-           class="edit-input">
-  </div>
-  <div class="actions">
-    <button class="edit-button">Edit</button>
-    <button class="delete-button">Delete</button>
-  </div>
-</li>
-<li class="task-item editing">
-  <input type="checkbox"
-         class="task-checkbox">
-  <div class="task">
-    <span class="task-text">Task description</span>
-    <input type="text"
-           class="edit-input">
-  </div>
-  <div class="actions">
-    <button class="edit-button">Edit</button>
-    <button class="delete-button">Delete</button>
+    <button class="edit-button"
+            *ngIf="isEdit"
+            (click)="editTitle()"
+            [disabled]="todo.completed">Done
+    </button>
+    <button class="edit-button"
+            *ngIf="!isEdit"
+            (click)="toggleEdit()"
+            [disabled]="todo.completed">Edit
+    </button>
+    <button (click)="remove()"
+            class="delete-button">Delete
+    </button>
   </div>
 </li>

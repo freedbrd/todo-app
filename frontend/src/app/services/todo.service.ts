@@ -21,7 +21,7 @@ export class TodoService {
     );
   }
 
-  addTodo(todo: ITodo): Observable<ITodo> {
+  addTodo(todo: {title: string}): Observable<ITodo> {
     return this.http.post<ITodo>(`${environment.apiUrl}/todos`, todo).pipe(
       tap((newTodo: ITodo) => {
         this.todoList$.next([...this.todoList$.value, newTodo]);
@@ -32,10 +32,10 @@ export class TodoService {
   editTodo(todo: ITodo): Observable<ITodo> {
     return this.http.put<ITodo>(`${environment.apiUrl}/todos/${todo.id}`, todo).
       pipe(
-        tap((updatedTodo: ITodo) => {
+        tap(() => {
           const todos = this.todoList$.value;
-          const index = todos.findIndex(t => t.id === updatedTodo.id);
-          todos[index] = updatedTodo;
+          const index = todos.findIndex(t => t.id === todo.id);
+          todos[index] = todo;
           this.todoList$.next(todos);
         }),
       );

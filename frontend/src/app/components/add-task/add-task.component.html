@@ -1,3 +1,4 @@
 <input type="text"
+       [formControl]="formControl"
        placeholder="Add task...">
-<button>Add</button>
+<button [disabled]="formControl.invalid" (click)="addTask()">Add</button>
