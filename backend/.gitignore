@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development server
+.env
+venv/
+
+# Logs and backups
+*.log
+*.bak
+
+# Dependencies
+/.venv
+/site-packages/
+
+# Other generated files
+db.sqlite3
+instance/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.ipynb_checkpoints/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
